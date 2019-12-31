@@ -1,11 +1,38 @@
-.quiz, .summary {
+*, *::before, *::after {
+    box-sizing: border-box;
+   
+}
+/* body {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vh;
+    height: 100vh;
+} */
+.nav {
+    background-color: white;
+}
+
+#timer {
+    color: aqua;
+    padding: 8px;
+    margin-left: 1005px;
+}
+#timer-value {
+    padding-top: 9px;
+
+    color: red;
+}
+.container, .summary {
     display: none;
 }
-.quiz ul {
+.container ul {
     list-style: none;
     padding: 0;
 }
-.quiz li {
+.container li {
     cursor: pointer;
 }
 .selected {

@@ -36,19 +36,20 @@ let questions = [
 // Where I put all event listeners
 $(document).ready(function(){
 
-
+    // start quiz
     $('.start a').click(function(e){
         e.preventDefault();
         $('.start').hide();
-        $('.quiz').show();
+        $('.container').show();
         showQuestion();
     });
-
-    $('.quiz ul').on('click', 'li', function(){
+    //select asnwer
+    $('.container ul').on('click', 'li', function(){
         $('.selected').removeClass('selected'); 
         $(this).addClass('selected');  
     });
-    $('.quiz a').click(function(e){
+    //submit answer
+    $('.container a').click(function(e){
         e.preventDefault(); 
         if ($('li.selected').length) {
           let guess = parseInt($('li.selected').attr('id'));
@@ -56,18 +57,22 @@ $(document).ready(function(){
         } else {
             alert('Please Select an Answer!!!')
         };
+    // score summary and quiz restart
+    $('.summary a').click(function(e){
+        e.preventDefault();
+          
 
-
+        })
     });
 });
  // FUNCTIONS
 
 function showQuestion () {
     let question = questions[currentQuestion];
-    $('.quiz h2').text(question.title);
-    $('.quiz ul').html('');
+    $('.container h2').text(question.title);
+    $('.container ul').html('');
     for (var i = 0; i < question.answers.length; i++) {
-      $('.quiz ul').append("<li id= '" + i + "'>" + question.answers[i] + "</li>");  
+      $('.container ul').append("<li id= '" + i + "'>" + question.answers[i] + "</li>");  
     }
 
 
@@ -82,12 +87,23 @@ function checkAnswer (guess) {
     if (currentQuestion >= questions.length){
         showSummary();
     }
-    else{ showQuestion();
+    else { 
+        showQuestion();
     }
    
 }
 
 function showSummary () {
-    $ ('.quiz').hide();
+    $ ('.container').hide();
     $('.summary').show();
+    $('.summary p').text("Congrats you scored"+ score +" out of "+ questions.length +" correct!")
+}
+
+function restartQuiz(){
+    $('.summary').hide();
+    $ ('.container').show();
+    score = 0;
+    currentQuestion = 0;
+    showQuestion();
+
 }
