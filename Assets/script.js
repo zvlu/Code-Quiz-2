@@ -3,6 +3,7 @@
 
 let score = 0;
 let currentQuestion = 0;
+var timeleft = 75;
 
 // Object of Questions
 let questions = [
@@ -42,12 +43,22 @@ $(document).ready(function(){
         $('.start').hide();
         $('.container').show();
         showQuestion();
+        setInterval(function () { 
+            $('#timer-value').innerHTML = timeleft;
+                timeleft -= 1;
+                if(timeleft <= 0){
+                clearInterval();
+                $('#timer-value').innerHTML = "Finished"
+                }
+            }, 1000);
     });
     //select asnwer
     $('.container ul').on('click', 'li', function(){
         $('.selected').removeClass('selected'); 
         $(this).addClass('selected');  
     });
+
+    
     //submit answer
     $('.container a').click(function(e){
         e.preventDefault(); 
@@ -66,6 +77,9 @@ $(document).ready(function(){
     });
 });
  // FUNCTIONS
+
+
+
 
 function showQuestion () {
     let question = questions[currentQuestion];
